@@ -20,6 +20,7 @@ class BaseCanvas():
                 (self.width, self.height), pygame.RESIZABLE)
             self.fullscreen = False
 
+        self.screen_size = pygame.Vector2(self.width, self.height)
         self.canvas.fill(self.BACKGROUND_COLOR)
         self.clock = pygame.time.Clock()
         # Use default system font
