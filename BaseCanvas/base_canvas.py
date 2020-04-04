@@ -20,7 +20,6 @@ class BaseCanvas():
                 (self.width, self.height), pygame.RESIZABLE)
             self.fullscreen = False
 
-        self.screen_size = pygame.Vector2(self.width, self.height)
         self.canvas.fill(self.BACKGROUND_COLOR)
         self.clock = pygame.time.Clock()
         # Use default system font
@@ -49,13 +48,19 @@ class BaseCanvas():
                             help='Canvas height', default=800)
         parser.add_argument('--fps', type=int,
                             help='Program FPS', default=60)
+
+        self.pre_setup_hook(parser)
+
         args = parser.parse_args()
 
         self.width = args.width
         self.height = args.height
         self.fps = args.fps
 
-        self.setup_hook()
+        try:
+            self.setup_hook(args)
+        except TypeError as e:
+            self.setup_hook()
 
     def loop(self):
         while self._continue_flag:
@@ -97,7 +102,15 @@ class BaseCanvas():
 
             self.handle_events_hook(event)
 
-    def setup_hook(self):
+    def pre_setup_hook(self, parser):
+        """
+        Here is where any sort of command-line variable declaration should happen.
+        This method is called only once.
+        This method is intended to be overridden by a heritor.
+        """
+        pass
+
+    def setup_hook(self, args=None):
         """
         Here is where any sort of variable initialization should happen.
         This method is called only once.
