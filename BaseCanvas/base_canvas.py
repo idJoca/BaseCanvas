@@ -94,6 +94,7 @@ class BaseCanvas():
                         self.fullscreen = False
                         self.canvas = pygame.display.set_mode((self.width, self.height),
                                                               pygame.RESIZABLE)
+                    self.screen_size = pygame.Vector2(self.width, self.height)
 
             if event.type == pygame.VIDEORESIZE:
                 self.width, self.height = event.size
