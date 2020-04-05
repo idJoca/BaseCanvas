@@ -6,6 +6,8 @@ class BaseCanvas():
     _continue_flag = True
     BACKGROUND_COLOR = (40, 40, 40)
     FONT_SIZE = 12
+    BOLD = False
+    ITALIC = False
 
     def __init__(self):
         pygame.init()
@@ -25,7 +27,7 @@ class BaseCanvas():
         self.clock = pygame.time.Clock()
         # Use default system font
         self.text_renderer = pygame.font.SysFont(
-            pygame.font.get_fonts()[0], self.FONT_SIZE)
+            pygame.font.get_fonts()[0], self.FONT_SIZE, self.BOLD, self.ITALIC)
 
         self.init_hook()
 
