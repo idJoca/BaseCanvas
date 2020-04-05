@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="base-canvas",
-    version="1.0.2",
+    version="1.0.3",
     author="João Pedro Braz",
     author_email="brazjoaopedro@ymail.com",
     description="BaseCanvas is a small helper-class that handles common tasks in pygame.",
