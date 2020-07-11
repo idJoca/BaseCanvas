@@ -8,6 +8,7 @@ class BaseCanvas():
     FONT_SIZE = 12
     BOLD = False
     ITALIC = False
+    SHOULD_FILL = True
 
     def __init__(self):
         pygame.init()
@@ -67,7 +68,8 @@ class BaseCanvas():
 
     def loop(self):
         while self._continue_flag:
-            self.canvas.fill(self.BACKGROUND_COLOR)
+            if self.SHOULD_FILL:
+                self.canvas.fill(self.BACKGROUND_COLOR)
             self.loop_hook()
             pygame.display.update()
             self._handle_events()
@@ -97,6 +99,7 @@ class BaseCanvas():
                         self.canvas = pygame.display.set_mode((self.width, self.height),
                                                               pygame.RESIZABLE)
                     self.screen_size = pygame.Vector2(self.width, self.height)
+                    self.resize_hook()
 
             if event.type == pygame.VIDEORESIZE:
                 self.width, self.height = event.size
@@ -104,6 +107,7 @@ class BaseCanvas():
                     self.canvas = pygame.display.set_mode((self.width, self.height),
                                                           pygame.RESIZABLE)
                 self.screen_size = pygame.Vector2(self.width, self.height)
+                self.resize_hook()
 
             self.handle_events_hook(event)
 
@@ -147,5 +151,12 @@ class BaseCanvas():
         Here is we're the non-default event handling should happen.
         This method is called once every frame.
         This method is intended to be overridden by a heritor.
+        """
+        pass
+
+    def resize_hook(self):
+        """
+        This hook will be called when a screen resize happens.
+        Use it to take care of screen size dependencies.
         """
         pass
